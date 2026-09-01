@@ -1,0 +1,1 @@
+import PhysioPortfolio from './PhysioPortfolio'; export default function App() { return <PhysioPortfolio />; }
