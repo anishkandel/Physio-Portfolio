@@ -24,48 +24,39 @@ const PORTRAIT_SRC = myPhoto;
 const VIDEOS = [
   {
     id: 1,
-    tag: "ACL Rehab",
-    degree: "0°→130°",
-    title: "Post-Op Knee: Return to Full Flexion",
-    blurb:
-      "12-week progression from guarded weight-bearing to full unresisted flexion, tracked week over week.",
+    tag: "Knee",
+    title: "Knee Joint Tapping",
     youtubeId: "R-Sy22ns40Q",
   },
   {
     id: 2,
     tag: "Shoulder",
-    degree: "45°→180°",
-    title: "Frozen Shoulder: Restoring Overhead Reach",
-    blurb:
-      "Capsular mobilisation paired with a home-loading plan to rebuild overhead range without pain.",
+    title: "Shoulder Joint Tapping",
     youtubeId: "p-G5q0549Wk",
   },
   {
     id: 3,
     tag: "Thumb",
-    degree: "0°→90°",
-    title: "Sprinter Hamstring: Return to Sprint",
-    blurb:
-      "Eccentric strength phase and sprint-mechanics cueing ahead of a track return.",
+    title: "Thumb Tapping",
     youtubeId: "uytF5skX7kA",
   },
   {
     id: 4,
     tag: "K- Tape",
-    degree: "Load ↑40%",
-    title: "Chronic Low Back: Rebuilding Load Tolerance",
-    blurb:
-      "Graded exposure programme moving a desk-bound client from guarded movement to confident lifting.",
+    title: "Achilles Tendon Tapping",
     youtubeId: "wBdj6oyQqFk",
   },
   {
     id: 5,
     tag: "Ankle",
-    degree: "0°→150°",
-    title: "Total Knee Replacement: Week 1–10",
-    blurb:
-      "Early mobilisation through independent stair negotiation, documented across ten weeks.",
+    title: "Ankle Joint Tapping",
     youtubeId: "SRjfL5m1nZA",
+  },
+  {
+    id: 6,
+    tag: "Injury Prevention",
+    title: "Theortical Basis of Injury Prevention",
+    youtubeId: "gdUcaaraZaI",
   },
 ];
 
@@ -476,15 +467,15 @@ export default function PhysioPortfolio() {
       {/* NAV */}
       <nav className={`pf-nav ${scrolled ? "scrolled" : ""}`}>
         <div className="pf-nav-logo">
-          Saubhagya Maharjan <span></span>
+          Sawagya Maharjan <span></span>
         </div>
         <ul className="pf-nav-links">
           <li><a href="#about">Approach</a></li>
-          <li><a href="#cases">Case Studies</a></li>
-          <li><a href="#specialties">Specialties</a></li>
+          <li><a href="#cases">Injury Prevention</a></li>
+          {/* <li><a href="#specialties">Specialties</a></li> */}
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <button className="pf-nav-cta">Book a Session</button>
+        {/* <button className="pf-nav-cta">Book a Session</button> */}
         <button className="pf-nav-mobile-btn" onClick={() => setNavOpen(!navOpen)} aria-label="Menu">
           <Menu size={22} />
         </button>
@@ -494,27 +485,27 @@ export default function PhysioPortfolio() {
       <header className="pf-hero">
         <div className="pf-hero-inner">
           <div>
-            <span className="pf-eyebrow">Student of Sport and Exercise Science | Physiotherapy Assistant · Hamilton, NZ</span>
+            <span className="pf-eyebrow">Student of Sport and Exercise Science · Hamilton, NZ</span>
             <h1>
               Prevent <em>injury</em>, recover, and perform.
             </h1>
             <p className="pf-hero-sub">
-              Sport and exercise science student and physiotherapy assistant based in
+              Sport and exercise science student based in
               Hamilton, focused on injury prevention, rehabilitation and performance.
             </p>
             <div className="pf-hero-actions">
-              <button className="pf-btn-primary">
+              {/* <button className="pf-btn-primary">
                 Book a Session <ArrowUpRight size={16} />
-              </button>
+              </button> */}
               <a href="#cases" style={{ textDecoration: "none" }}>
                 <button className="pf-btn-ghost">Watch Case Studies</button>
               </a>
             </div>
           </div>
-          <div className="pf-hero-visual">
+          {/* <div className="pf-hero-visual">
             <Goniometer size={260} sweep={128} />
             <div className="pf-goni-label pf-mono">RANGE OF MOTION · 0°–180°</div>
-          </div>
+          </div> */}
         </div>
         <div className="pf-hero-stats">
           {STATS.map((s) => (
@@ -544,20 +535,16 @@ export default function PhysioPortfolio() {
           </div>
           <div className="pf-about-body">
             <span className="pf-head-eyebrow">My Approach</span>
-            <h2 style={{ marginBottom: 20 }}>Rehab is a measurement problem before it's a motivation problem.</h2>
+            {/* <h2 style={{ marginBottom: 20 }}>Rehab is a measurement problem before it's a motivation problem.</h2> */}
             <p>
-              Every plan starts with a real baseline — goniometry, strength testing,
-              movement screening — so progress is something we can both see, not just feel.
-              From there, treatment is built around your actual goal: back on the field,
-              back on your feet, or simply back to a pain-free morning.
+              Every athlete I work with starts with a real assessment movement screening, strength and function testing, understanding the mechanism of injury, so progress is something we can track, not just hope for. From there, rehabilitation is built around a clear goal: back to training, back to competition, or simply back to moving without pain
             </p>
             <p>
-              I work across post-surgical orthopaedics, sports rehabilitation and chronic
-              pain management, blending manual therapy with progressive, load-based exercise.
+              I've worked closely with athletes across various sports at S&S Health Research Center, supporting the assessment, management, and rehabilitation of sports-related injuries, alongside broader clinical experience across diverse conditions and populations. I'm currently building on this through a degree in Sport and Exercise Science at Wintec, New Zealand, with a focus on injury prevention, athletic rehabilitation, and performance optimization.
             </p>
             <div className="pf-credentials">
               <span className="pf-credential">Sport & Exercise Science Student</span>
-              <span className="pf-credential">Physiotherapy Assistant</span>
+
               <span className="pf-credential">Hamilton, NZ</span>
             </div>
           </div>
@@ -568,10 +555,8 @@ export default function PhysioPortfolio() {
       <section className="pf-section" id="cases">
         <div className="pf-head">
           <div>
-            <span className="pf-head-eyebrow">Case Studies</span>
-            <h2>Recovery, documented on camera.</h2>
+            <span className="pf-head-eyebrow">Injury Prevention and Tapping</span>
           </div>
-          <p>Five real rehabilitation journeys — each tagged with the range-of-motion or load gain achieved over the course of treatment.</p>
         </div>
         <div className="pf-video-grid">
           {VIDEOS.map((v) => (
@@ -589,7 +574,7 @@ export default function PhysioPortfolio() {
       </section>
 
       {/* SPECIALTIES */}
-      <section className="pf-section" id="specialties">
+      {/* <section className="pf-section" id="specialties">
         <div className="pf-head">
           <div>
             <span className="pf-head-eyebrow">Specialties</span>
@@ -604,10 +589,10 @@ export default function PhysioPortfolio() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* TESTIMONIAL */}
-      <section className="pf-section">
+      {/* <section className="pf-section">
         <div className="pf-testimonial">
           <p className="pf-testimonial-quote">
             "I went from unable to descend a flight of stairs to running my first
@@ -616,7 +601,7 @@ export default function PhysioPortfolio() {
           </p>
           <div className="pf-testimonial-attr pf-mono">— J. HARLOW, ACL RECONSTRUCTION PATIENT</div>
         </div>
-      </section>
+      </section> */}
 
       {/* FOOTER / CONTACT */}
       <footer className="pf-footer" id="contact">
@@ -625,17 +610,16 @@ export default function PhysioPortfolio() {
           <h2>Let's build your recovery plan.</h2>
           <div className="pf-footer-row">
             <div className="pf-footer-contact">
-              hello@saubhagyamaharjan.com<br />
-              <a href="tel:+640000000">+64 00 000 000</a><br />
+              swgymaharjan2060@gmail.com<br />
+              <a href="tel:+640000000">+64 0274 167 963</a><br />
               Hamilton, NZ
             </div>
-            <button className="pf-btn-primary">
+            {/* <button className="pf-btn-primary">
               Book a Session <ArrowUpRight size={16} />
-            </button>
+            </button> */}
           </div>
           <div className="pf-footer-bottom">
-            <span>© {new Date().getFullYear()} Saubhagya Maharjan</span>
-            <span className="pf-mono">RANGE OF MOTION · REBUILT</span>
+            <span>© {new Date().getFullYear()} Sawagya Maharjan</span>
           </div>
         </div>
       </footer>
