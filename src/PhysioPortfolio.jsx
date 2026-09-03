@@ -10,18 +10,17 @@ import {
   X,
   ArrowUpRight,
   Menu,
+  Image as ImageIcon,
 } from "lucide-react";
 import myPhoto from "./assets/mypic.jpeg";
-import video1 from "./assets/1.mp4";
-import video2 from "./assets/2.mp4";
-import video3 from "./assets/3.mp4";
-import video4 from "./assets/4.mp4";
-import video5 from "./assets/5.mp4";
 
 /* ------------------------------------------------------------------ */
 /*  DATA — swap this out with real content                            */
 /* ------------------------------------------------------------------ */
 const PORTRAIT_SRC = myPhoto;
+
+// For each video, use the YouTube VIDEO ID only — not the full URL.
+// e.g. from https://www.youtube.com/watch?v=dQw4w9WgXcQ the ID is: dQw4w9WgXcQ
 const VIDEOS = [
   {
     id: 1,
@@ -30,7 +29,7 @@ const VIDEOS = [
     title: "Post-Op Knee: Return to Full Flexion",
     blurb:
       "12-week progression from guarded weight-bearing to full unresisted flexion, tracked week over week.",
-    src: video1,
+    youtubeId: "R-Sy22ns40Q",
   },
   {
     id: 2,
@@ -39,34 +38,34 @@ const VIDEOS = [
     title: "Frozen Shoulder: Restoring Overhead Reach",
     blurb:
       "Capsular mobilisation paired with a home-loading plan to rebuild overhead range without pain.",
-    src: video2,
+    youtubeId: "p-G5q0549Wk",
   },
   {
     id: 3,
-    tag: "Sports",
+    tag: "Thumb",
     degree: "0°→90°",
     title: "Sprinter Hamstring: Return to Sprint",
     blurb:
       "Eccentric strength phase and sprint-mechanics cueing ahead of a track return.",
-    src: video3,
+    youtubeId: "uytF5skX7kA",
   },
   {
     id: 4,
-    tag: "Spine",
+    tag: "K- Tape",
     degree: "Load ↑40%",
     title: "Chronic Low Back: Rebuilding Load Tolerance",
     blurb:
       "Graded exposure programme moving a desk-bound client from guarded movement to confident lifting.",
-    src: video4,
+    youtubeId: "wBdj6oyQqFk",
   },
   {
     id: 5,
-    tag: "Post-Op",
+    tag: "Ankle",
     degree: "0°→150°",
     title: "Total Knee Replacement: Week 1–10",
     blurb:
       "Early mobilisation through independent stair negotiation, documented across ten weeks.",
-    src: video5,
+    youtubeId: "SRjfL5m1nZA",
   },
 ];
 
@@ -80,7 +79,7 @@ const SPECIALTIES = [
 ];
 
 const STATS = [
-  { value: "1.5", suffix: "+", label: "Years in ClinicalPractice" },
+  { value: "1.5", suffix: "+", label: "Years in Clinical Practice" },
   { value: "2", suffix: "+", label: "Athletes Returned to Sport" },
   { value: "15", suffix: "+", label: "Patient-Reported Outcome" },
 ];
@@ -212,9 +211,6 @@ export default function PhysioPortfolio() {
         @media (max-width: 720px) {
           .pf-section { padding: 64px 6vw; }
         }
-          .pf-portrait img {
-  width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 0;
-}
 
         /* NAV */
         .pf-nav {
@@ -353,9 +349,17 @@ export default function PhysioPortfolio() {
           border: 1px solid var(--line);
         }
         .pf-portrait::after {
-          content: ''; position: absolute; inset: 0;
+          content: ''; position: absolute; inset: 0; pointer-events: none;
           background: repeating-linear-gradient(115deg, transparent 0 26px, rgba(22,51,43,0.05) 26px 27px);
         }
+        .pf-portrait img {
+          width: 100%; height: 100%; object-fit: contain; display: block; position: relative; z-index: 1;
+        }
+        .pf-portrait-empty {
+          position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;
+          gap: 8px; color: var(--ink); opacity: 0.55; text-align: center; padding: 0 24px;
+        }
+        .pf-portrait-empty span { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; }
         .pf-about-body p { line-height: 1.75; font-size: 1.02rem; color: rgba(22,51,43,0.78); margin-bottom: 18px; }
         .pf-credentials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
         .pf-credential {
@@ -454,8 +458,8 @@ export default function PhysioPortfolio() {
           backdrop-filter: blur(4px);
         }
         .pf-lightbox-inner { width: 100%; max-width: 920px; position: relative; }
-        .pf-lightbox video {
-          width: 100%; border-radius: 12px; background: #000; aspect-ratio: 16/9; display: block;
+        .pf-lightbox iframe {
+          width: 100%; aspect-ratio: 16/9; border-radius: 12px; background: #000; display: block; border: 0;
         }
         .pf-lightbox-placeholder {
           width: 100%; aspect-ratio: 16/9; border-radius: 12px; background: var(--ink);
@@ -490,12 +494,13 @@ export default function PhysioPortfolio() {
       <header className="pf-hero">
         <div className="pf-hero-inner">
           <div>
-            <span className="pf-eyebrow">Student of Sport and Excercise Science | Physiotherapy Assistant · Hamilton, NZ</span>
+            <span className="pf-eyebrow">Student of Sport and Exercise Science | Physiotherapy Assistant · Hamilton, NZ</span>
             <h1>
-              Prevent <em>injury</em> Recover and Perform.
+              Prevent <em>injury</em>, recover, and perform.
             </h1>
             <p className="pf-hero-sub">
-              what you do-- your specialization, your approach, your philosophy. This is the first thing people will see when they visit your portfolio.
+              Sport and exercise science student and physiotherapy assistant based in
+              Hamilton, focused on injury prevention, rehabilitation and performance.
             </p>
             <div className="pf-hero-actions">
               <button className="pf-btn-primary">
@@ -526,40 +531,38 @@ export default function PhysioPortfolio() {
 
       {/* ABOUT */}
       <section className="pf-section" id="about">
-  <div className="pf-about">
-    <div className="pf-portrait">
-      {PORTRAIT_SRC ? (
-        <img src={PORTRAIT_SRC} alt="Portrait of Dr. Maya Whitfield" />
-      ) : (
-        <div className="pf-portrait-empty">
-          <ImageIcon size={26} strokeWidth={1.5} />
-          <span className="pf-mono">ADD HEADSHOT · PORTRAIT_SRC</span>
+        <div className="pf-about">
+          <div className="pf-portrait">
+            {PORTRAIT_SRC ? (
+              <img src={PORTRAIT_SRC} alt="Portrait of Saubhagya Maharjan" />
+            ) : (
+              <div className="pf-portrait-empty">
+                <ImageIcon size={26} strokeWidth={1.5} />
+                <span className="pf-mono">ADD HEADSHOT · PORTRAIT_SRC</span>
+              </div>
+            )}
+          </div>
+          <div className="pf-about-body">
+            <span className="pf-head-eyebrow">My Approach</span>
+            <h2 style={{ marginBottom: 20 }}>Rehab is a measurement problem before it's a motivation problem.</h2>
+            <p>
+              Every plan starts with a real baseline — goniometry, strength testing,
+              movement screening — so progress is something we can both see, not just feel.
+              From there, treatment is built around your actual goal: back on the field,
+              back on your feet, or simply back to a pain-free morning.
+            </p>
+            <p>
+              I work across post-surgical orthopaedics, sports rehabilitation and chronic
+              pain management, blending manual therapy with progressive, load-based exercise.
+            </p>
+            <div className="pf-credentials">
+              <span className="pf-credential">Sport & Exercise Science Student</span>
+              <span className="pf-credential">Physiotherapy Assistant</span>
+              <span className="pf-credential">Hamilton, NZ</span>
+            </div>
+          </div>
         </div>
-      )}
-    </div>
-    <div className="pf-about-body">
-      <span className="pf-head-eyebrow">My Approach</span>
-      <h2 style={{ marginBottom: 20 }}>Rehab is a measurement problem before it's a motivation problem.</h2>
-      <p>
-        Every plan starts with a real baseline — goniometry, strength testing,
-        movement screening — so progress is something we can both see, not just feel.
-        From there, treatment is built around your actual goal: back on the field,
-        back on your feet, or simply back to a pain-free morning.
-      </p>
-      <p>
-        I work across post-surgical orthopaedics, sports rehabilitation and chronic
-        pain management, blending manual therapy with progressive, load-based exercise.
-      </p>
-      <div className="pf-credentials">
-        <span className="pf-credential">DPT · Wintec College</span>
-        <span className="pf-credential">Sports Physiotherapy Cert.</span>
-        <span className="pf-credential">Dry Needling Certified</span>
-        <span className="pf-credential">Strength & Conditioning Coach</span>
-      </div>
-    </div>
-  </div>
-</section>
-    
+      </section>
 
       {/* VIDEO CASE STUDIES */}
       <section className="pf-section" id="cases">
@@ -622,8 +625,8 @@ export default function PhysioPortfolio() {
           <h2>Let's build your recovery plan.</h2>
           <div className="pf-footer-row">
             <div className="pf-footer-contact">
-              hello@mayawhitfielddpt.com<br />
-              <a href="tel:+6421000000">+64 21 000 000</a><br />
+              hello@saubhagyamaharjan.com<br />
+              <a href="tel:+640000000">+64 00 000 000</a><br />
               Hamilton, NZ
             </div>
             <button className="pf-btn-primary">
@@ -631,7 +634,7 @@ export default function PhysioPortfolio() {
             </button>
           </div>
           <div className="pf-footer-bottom">
-            <span>© {new Date().getFullYear()} Maya Whitfield, DPT</span>
+            <span>© {new Date().getFullYear()} Saubhagya Maharjan</span>
             <span className="pf-mono">RANGE OF MOTION · REBUILT</span>
           </div>
         </div>
@@ -644,13 +647,18 @@ export default function PhysioPortfolio() {
             <button className="pf-lightbox-close" onClick={() => setActiveVideo(null)}>
               <X size={16} /> Close
             </button>
-            {activeVideo.src ? (
-              <video src={activeVideo.src} controls autoPlay />
+            {activeVideo.youtubeId ? (
+              <iframe
+                src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
+                title={activeVideo.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             ) : (
               <div className="pf-lightbox-placeholder">
                 <Play size={30} />
                 <span className="pf-mono" style={{ fontSize: "0.8rem" }}>
-                  Add a video source for "{activeVideo.title}"
+                  Add a YouTube video ID for "{activeVideo.title}"
                 </span>
               </div>
             )}
