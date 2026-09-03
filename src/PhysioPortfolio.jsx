@@ -497,9 +497,9 @@ export default function PhysioPortfolio() {
               {/* <button className="pf-btn-primary">
                 Book a Session <ArrowUpRight size={16} />
               </button> */}
-              <a href="#cases" style={{ textDecoration: "none" }}>
+              {/* <a href="#cases" style={{ textDecoration: "none" }}>
                 <button className="pf-btn-ghost">Watch Case Studies</button>
-              </a>
+              </a> */}
             </div>
           </div>
           {/* <div className="pf-hero-visual">
@@ -611,7 +611,7 @@ export default function PhysioPortfolio() {
           <div className="pf-footer-row">
             <div className="pf-footer-contact">
               swgymaharjan2060@gmail.com<br />
-              <a href="tel:+640000000">+64 0274 167 963</a><br />
+              <a href="tel:+64 0274 167 963">+64 0274 167 963</a><br />
               Hamilton, NZ
             </div>
             {/* <button className="pf-btn-primary">
