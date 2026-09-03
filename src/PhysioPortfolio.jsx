@@ -235,6 +235,48 @@ export default function PhysioPortfolio() {
           .pf-nav-mobile-btn { display: block; }
         }
 
+
+              .pf-mobile-menu {
+        position: fixed;
+        top: 0; right: 0;
+        height: 100vh;
+        width: min(78vw, 320px);
+        background: var(--stone);
+        z-index: 60;
+        box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+        padding: 28px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      .pf-mobile-menu.open {
+        transform: translateX(0);
+      }
+      .pf-mobile-menu a {
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: 500;
+        padding: 14px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      .pf-mobile-menu-close {
+        align-self: flex-end;
+        background: none;
+        border: none;
+        color: var(--ink);
+        cursor: pointer;
+        margin-bottom: 12px;
+      }
+      .pf-mobile-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(14,33,26,0.5);
+        z-index: 55;
+      }
+
         /* HERO */
         .pf-hero {
           position: relative;
@@ -480,6 +522,19 @@ export default function PhysioPortfolio() {
           <Menu size={22} />
         </button>
       </nav>
+      {navOpen && (
+  <>
+    <div className="pf-mobile-overlay" onClick={() => setNavOpen(false)} />
+    <div className="pf-mobile-menu open">
+      <button className="pf-mobile-menu-close" onClick={() => setNavOpen(false)} aria-label="Close menu">
+        <X size={22} />
+      </button>
+      <a href="#about" onClick={() => setNavOpen(false)}>Approach</a>
+      <a href="#cases" onClick={() => setNavOpen(false)}>Injury Prevention</a>
+      <a href="#contact" onClick={() => setNavOpen(false)}>Contact</a>
+    </div>
+  </>
+)}
 
       {/* HERO */}
       <header className="pf-hero">
